@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   finish_him.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hzaz <hzaz@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: vabertau <vabertau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/08 21:08:17 by hedi              #+#    #+#             */
-/*   Updated: 2024/05/14 11:45:37 by hzaz             ###   ########.fr       */
+/*   Updated: 2024/05/14 12:15:44 by vabertau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ void	exec_build(t_data *shell, char **f)
 	else if (ft_same_str(f[0], "env", 3))
 		shell->last_return_code = ft_env(shell->envp);
 	else if (ft_same_str(f[0], "exit", 4))
-		ft_exit(f, shell); // Note que cette fonction peut arrêter le programme.
+		ft_exit(f, shell);
 	else
 		return ;
 	exit_free(shell, 0);
@@ -39,28 +39,37 @@ void	exec_build(t_data *shell, char **f)
 // 	ft_cd();
 // printf("test");
 
+static void	init_exec_path(int *i, t_env **e, t_data *sh)
+{
+	*i = -1;
+	*e = sh->env;
+}
+
+static void	incr_j(t_env *e, int *j)
+{
+	while (e->val[*j] != ':' && e->val[*j] && e->val)
+		(*j)++;
+}
+
 void	exec_path(t_data *sh, t_exec *cmd, char **f, char *tmp)
 {
 	int		i;
 	int		j;
 	int		k;
 	char	*ret;
-	t_env *e;
+	t_env	*e;
 
-	i = -1;
-	e = sh->env;
+	init_exec_path(&i, &e, sh);
 	while (e)
 	{
 		if (ft_same_str(e->var_name, "PATH", 4))
 		{
-
 			j = -1;
 			while (e->val && e->val[++j])
 			{
 				k = j;
-				while (e->val[j] != ':' && e->val[j] && e->val)
-					j++;
-				ret = join_free1(ft_substr(e->val, k, ((j)-k)), tmp);
+				incr_j(e, &j);
+				ret = join_free1(ft_substr(e->val, k, ((j) - k)), tmp);
 				if (e->val[j] == ':')
 					if (access(ret, F_OK) == 0)
 						execve(ret, f, sh->char_env);
@@ -73,14 +82,13 @@ void	exec_path(t_data *sh, t_exec *cmd, char **f, char *tmp)
 
 void	exec_cmd(t_data *shell, t_exec *cmd)
 {
-	char *ret;
-	char *tmp;
-	char **f;
+	char	*ret;
+	char	*tmp;
+	char	**f;
 
 	handle_redirections(cmd, shell);
 	f = cmd->split_cmd;
 	exec_build(shell, f);
-	// printf("%s", f[0]);
 	tmp = ft_strjoin("/", f[0]);
 	if (access(tmp, F_OK) == 0)
 		execve(tmp, f, shell->envp);
