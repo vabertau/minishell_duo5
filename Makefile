@@ -11,7 +11,8 @@ checks/check_pipe_ext.c parsing/pnb_cmd.c parsing/parser.c parsing/pmalloc_exec.
 parsing/pinit_exec.c executor/executor.c expands/expands.c checks_tokens/check_redirfile.c sig.c \
 executor/finish_him.c executor/redir.c executor/safe_op.c executor/utils.c \
 builtins/ft_echo.c builtins/dir.c builtins/env.c checks/check_fasa.c expands/is_to_expand.c expands/replace_var.c \
-free/exit_free2.c parsing/spaces_bet_tokens2.c parsing/pfill_redir2.c parsing/ft_quotesplit2.c sig2.c builtins/env2.c builtins/env3.c builtins/env4.c executor/executor2.c
+free/exit_free2.c parsing/spaces_bet_tokens2.c parsing/pfill_redir2.c parsing/ft_quotesplit2.c sig2.c builtins/env2.c builtins/env3.c builtins/env4.c executor/executor2.c \
+executor/utils2.c
 
 SRCS = $(addprefix srcs/, $(FILENAMES))
 

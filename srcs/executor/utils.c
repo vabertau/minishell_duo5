@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hedi <hedi@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: vabertau <vabertau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/08 21:06:09 by hedi              #+#    #+#             */
-/*   Updated: 2024/05/12 17:02:20 by hedi             ###   ########.fr       */
+/*   Updated: 2024/05/14 12:27:29 by vabertau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,53 +116,5 @@ int	ft_same_str(char *str1, char *str2, size_t n)
 	}
 	if (str1[i] || str2[i])
 		return (0);
-	return (1);
-}
-
-int	ft_same_str_exact_free1(char *str1, char *str2)
-{
-	int	i;
-
-	i = 0;
-	if (ft_strlen(str1) != ft_strlen(str2))
-	{
-		free(str1);
-		return (0);
-	}
-	while ( str1 && str2 && str1[i] && str2[i])
-	{
-		if (str1[i] != str2[i])
-		{
-			free(str1);
-			return (0);
-		}
-		i++;
-	}
-	if (str1[i] || str2[i])
-		return (0);
-	free(str1);
-	return (1);
-}
-
-int	ft_same_str_exact(char *str1, char *str2)
-{
-	int	i;
-	//printf("\ntest1\n");
-	i = 0;
-	if (ft_strlen(str1) != ft_strlen(str2))
-		return (0);
-	printf("%s\n%s\n", str1, str2);
-	while ( str1 && str2 && str1[i] && str2[i])
-	{
-		if (str1[i] != str2[i])
-		{
-			printf("\ntest2\n");
-			return (0);
-		}
-		i++;
-	}
-	if (str1[i] || str2[i])
-		return (0);
-	
 	return (1);
 }

@@ -6,7 +6,7 @@
 /*   By: vabertau <vabertau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/08 21:03:31 by hedi              #+#    #+#             */
-/*   Updated: 2024/05/14 10:50:09 by vabertau         ###   ########.fr       */
+/*   Updated: 2024/05/14 12:19:28 by vabertau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,7 +85,7 @@ void	fill_redir_heredoc(t_data *shell, int *cpt, t_token *redir)
 	int		fd;
 	char	*line;
 	char	*full_path;
-	int	mem_stdin;
+	int		mem_stdin;
 
 	mem_stdin = dup(STDIN_FILENO);
 	heredoc_signals();
@@ -105,7 +105,6 @@ void	fill_redir_heredoc(t_data *shell, int *cpt, t_token *redir)
 		line = readline("> ");
 	}
 	dup2(mem_stdin, STDIN_FILENO);
-	safe_close(fd, shell);
 	redir->word = ft_strdup(full_path);
-	free(full_path);
+	return ((void)safe_close(fd, shell), (void)free(full_path));
 }
