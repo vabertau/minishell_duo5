@@ -6,28 +6,11 @@
 /*   By: vabertau <vabertau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/24 17:43:54 by hzaz              #+#    #+#             */
-/*   Updated: 2024/05/13 21:58:22 by vabertau         ###   ########.fr       */
+/*   Updated: 2024/05/14 12:02:47 by vabertau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
-
-int	init_pipes(t_data *shell)
-{
-	int	i;
-
-	i = 0;
-	while (i < (shell->nb_cmd - 1))
-	{
-		if (pipe(shell->pipe_fds + i * 2) < 0)
-		{
-			perror("pipe");
-			return (0);
-		}
-		i++;
-	}
-	return (1);
-}
 
 void	fork_cmd(t_data *shell)
 {
@@ -86,7 +69,8 @@ void	close_wait(t_data *shell)
 		waitpid(current_cmd->pid, &status, 0);
 		shell->last_return_code = WEXITSTATUS(status);
 		if (WIFSIGNALED(status))
-			shell->last_return_code = return_if_sig(status, shell->last_return_code);
+			shell->last_return_code = return_if_sig(status,
+					shell->last_return_code);
 		current_cmd = current_cmd->next;
 	}
 	if (shell->pipe_fds)
@@ -120,8 +104,9 @@ int	special_built(t_exec *cmd, t_data *shell)
 
 int	executor(t_data *shell)
 {
-	int		status;
-	int		ret;
+	int	status;
+	int	ret;
+
 	shell->spec_built = 0;
 	prepare_heredocs(shell);
 	if (shell->nb_cmd > 1)
@@ -129,11 +114,9 @@ int	executor(t_data *shell)
 		if (!init_pipes(shell))
 			exit_free(shell, 127);
 	}
-
 	ret = special_built(shell->exec, shell);
 	if (shell->spec_built)
 		return (ret);
-	//printf("\ntest\n");
 	fork_cmd(shell);
 	close_wait(shell);
 	return (shell->last_return_code);
