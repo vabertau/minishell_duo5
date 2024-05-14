@@ -6,7 +6,7 @@
 /*   By: hzaz <hzaz@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/14 11:34:46 by vabertau          #+#    #+#             */
-/*   Updated: 2024/05/14 12:53:50 by hzaz             ###   ########.fr       */
+/*   Updated: 2024/05/14 12:57:53 by hzaz             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,16 +41,13 @@ int	var_in_env(char *s, t_data *shell)
 	return (ret);
 }
 
-t_env	*initialize_new_node(char **str)
+t_env	*initialize_new_node(char **str, t_data *shell)
 {
 	t_env	*new_node;
 
 	new_node = malloc(sizeof(t_env));
 	if (!new_node)
-	{
 		perror("malloc");
-		return (NULL);
-	}
 	if (!str[1])
 	{
 		new_node->var = ft_strdup(str[0]);
@@ -99,7 +96,7 @@ void	ft_add_env(char *s, t_data *shell)
 	str = split_var(s, shell);
 	if (!str)
 		return ;
-	new_node = initialize_new_node(str);
+	new_node = initialize_new_node(str, shell);
 	if (!new_node)
 		return ;
 	add_to_env(new_node, shell);

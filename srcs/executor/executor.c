@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   executor.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vabertau <vabertau@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hzaz <hzaz@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/24 17:43:54 by hzaz              #+#    #+#             */
-/*   Updated: 2024/05/14 12:02:47 by vabertau         ###   ########.fr       */
+/*   Updated: 2024/05/14 12:56:52 by hzaz             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,9 +93,9 @@ int	special_built(t_exec *cmd, t_data *shell)
 	else if (ft_same_str(f[0], "export", 6))
 		return (ft_export(f, shell));
 	else if (ft_same_str(f[0], "unset", 5))
-		return (ft_unset(f));
+		return (ft_unset(shell, f));
 	else if (ft_same_str(f[0], "env", 3))
-		return (ft_env(shell->envp));
+		return (ft_env(shell, f));
 	else if (ft_same_str(f[0], "exit", 4))
 		return (ft_exit(f, shell));
 	shell->spec_built = FALSE;
