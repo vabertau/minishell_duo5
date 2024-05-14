@@ -3,15 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hzaz <hzaz@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: vabertau <vabertau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/10 16:54:44 by vabertau          #+#    #+#             */
-/*   Updated: 2024/05/14 12:34:31 by hzaz             ###   ########.fr       */
+/*   Updated: 2024/05/14 12:40:57 by vabertau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
-
+/*
 void	aff_val(t_data *data)
 {
 	t_exec	*cur_cmd;
@@ -58,8 +58,6 @@ void	set_char_env(t_data *shell)
 	int		len;
 	int		i;
 
-	// if(shell->char_env)
-	// 	free(shell->char_env);
 	i = -1;
 	tmp = shell->env;
 	len = len_env(tmp);
@@ -75,7 +73,7 @@ void	set_char_env(t_data *shell)
 	}
 	shell->char_env[i] = NULL;
 }
-
+*/
 void	trim_env(t_data *shell)
 {
 	t_env	*tmp;

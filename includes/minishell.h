@@ -154,6 +154,12 @@ int					ft_echo(char **split_cmd);
 
 char				*join_free1(char const *s1, char const *s2);
 
+// ====== MAIN ======
+
+void				set_char_env(t_data *shell);
+int					len_env(t_env *env);
+void				aff_val(t_data *data);
+
 // Prototypes des fonctions de gestion de redirection
 void				handle_input_redirection(t_token *redir, t_data *shell);
 void				handle_output_redirection(t_token *redir, t_data *shell);
