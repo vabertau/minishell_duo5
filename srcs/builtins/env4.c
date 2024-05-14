@@ -6,7 +6,7 @@
 /*   By: hzaz <hzaz@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/14 11:34:46 by vabertau          #+#    #+#             */
-/*   Updated: 2024/05/14 13:16:45 by hzaz             ###   ########.fr       */
+/*   Updated: 2024/05/14 13:44:51 by hzaz             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,6 +100,10 @@ void	ft_add_env(char *s, t_data *shell)
 	if (!new_node)
 		return ;
 	add_to_env(new_node, shell);
+	if (str[1])
+		free(str[1]);
+	free(str[0]);
+	free(str);
 }
 
 int	ft_putenv(char *s, t_data *shell)

@@ -6,7 +6,7 @@
 /*   By: hzaz <hzaz@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/09 00:47:00 by hedi              #+#    #+#             */
-/*   Updated: 2024/05/14 13:15:31 by hzaz             ###   ########.fr       */
+/*   Updated: 2024/05/14 13:38:29 by hzaz             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,6 +98,10 @@ void	ft_update_env(char *str, t_data *shell, int pos)
 		ft_update_env_inc(&tmp, s, pos);
 	else
 		ft_update_env_inc2(&tmp, s, pos);
+	if (s[1])
+		free(s[1]);
+	free(s[0]);
+	free(s);
 }
 /*
 void	ft_add_env(char *s, t_data *shell)
