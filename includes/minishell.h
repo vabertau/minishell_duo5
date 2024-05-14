@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   minishell.h                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: hzaz <hzaz@student.42.fr>                  +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/05/14 13:05:07 by hzaz              #+#    #+#             */
+/*   Updated: 2024/05/14 13:33:02 by hzaz             ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef MINISHELL_H
 # define MINISHELL_H
 
@@ -208,7 +220,7 @@ void				setup_heredoc_handlers(void);
 int					ft_echo(char **split_cmd);
 void				main_signals(void);
 void				execute_signals(int pid);
-int					return_if_sig(int status, int l);
+int					return_if_sig(int status);
 void				heredoc_signals(void);
 void				heredoc_sigint(int sig);
 
@@ -222,7 +234,7 @@ int					ft_pwd(t_data *data);
 int					ft_same_str_exact_free1(char *str1, char *str2);
 char				*ft_strndup_var(const char *s, int n);
 char				**malloc_var(int i, char *s, int j, int n);
-char				**split_var(char *s, t_data *shell);
+char				**split_var(char *s);
 int					find_index_env(char *env);
 int					var_in_env(char *s, t_data *shell);
 int					check_plus(char *s);
@@ -232,9 +244,13 @@ int					ft_putenv(char *s, t_data *shell);
 void				ft_printf_var_env(char *var);
 int					check_cmd(char *s);
 int					ft_export(char **split_cmd, t_data *shell);
-int	ft_unset(t_data *shell, char **split_cmd);
-int	ft_env(t_data *shell, char **f);
+int					ft_unset(t_data *shell, char **split_cmd);
+int					ft_env(t_data *shell, char **f);
 int					have_equal(char *env);
+void				free_single_env(t_env *e);
+int					check_s(char *s);
+int					validate_and_add_var(char *var, t_data *shell);
+void				display_exported_vars(t_env *env);
 
 /* Function prototype for ft_exit */
 int					ft_exit(char **split_cmd, t_data *data);

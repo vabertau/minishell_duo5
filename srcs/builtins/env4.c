@@ -6,7 +6,7 @@
 /*   By: hzaz <hzaz@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/14 11:34:46 by vabertau          #+#    #+#             */
-/*   Updated: 2024/05/14 12:57:53 by hzaz             ###   ########.fr       */
+/*   Updated: 2024/05/14 13:16:45 by hzaz             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ int	var_in_env(char *s, t_data *shell)
 	t_env	*tmp;
 	char	**var;
 
-	var = split_var(s, shell);
+	var = split_var(s);
 	tmp = shell->env;
 	if (!var)
 	{
@@ -41,7 +41,7 @@ int	var_in_env(char *s, t_data *shell)
 	return (ret);
 }
 
-t_env	*initialize_new_node(char **str, t_data *shell)
+t_env	*initialize_new_node(char **str)
 {
 	t_env	*new_node;
 
@@ -93,10 +93,10 @@ void	ft_add_env(char *s, t_data *shell)
 	char	**str;
 	t_env	*new_node;
 
-	str = split_var(s, shell);
+	str = split_var(s);
 	if (!str)
 		return ;
-	new_node = initialize_new_node(str, shell);
+	new_node = initialize_new_node(str);
 	if (!new_node)
 		return ;
 	add_to_env(new_node, shell);

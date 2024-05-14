@@ -6,7 +6,7 @@
 /*   By: hzaz <hzaz@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/08 21:08:17 by hedi              #+#    #+#             */
-/*   Updated: 2024/05/14 12:57:25 by hzaz             ###   ########.fr       */
+/*   Updated: 2024/05/14 13:13:39 by hzaz             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ static void	incr_j(t_env *e, int *j)
 		(*j)++;
 }
 
-void	exec_path(t_data *sh, t_exec *cmd, char **f, char *tmp)
+void	exec_path(t_data *sh, char **f, char *tmp)
 {
 	int		i;
 	int		j;
@@ -93,7 +93,7 @@ void	exec_cmd(t_data *shell, t_exec *cmd)
 	if (access(tmp, F_OK) == 0)
 		execve(tmp, f, shell->envp);
 	else
-		exec_path(shell, cmd, f, tmp);
+		exec_path(shell, f, tmp);
 	ret = join_free1(ft_strjoin("command not found: ", f[0]), "\n");
 	ft_putstr_fd_free(ret, 2);
 	free(tmp);

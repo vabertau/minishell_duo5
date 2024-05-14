@@ -6,7 +6,7 @@
 /*   By: hzaz <hzaz@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/24 17:43:54 by hzaz              #+#    #+#             */
-/*   Updated: 2024/05/14 12:56:52 by hzaz             ###   ########.fr       */
+/*   Updated: 2024/05/14 13:12:06 by hzaz             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,6 @@
 void	fork_cmd(t_data *shell)
 {
 	int		i;
-	int		j;
 	t_exec	*current_cmd;
 	pid_t	pid;
 
@@ -69,8 +68,7 @@ void	close_wait(t_data *shell)
 		waitpid(current_cmd->pid, &status, 0);
 		shell->last_return_code = WEXITSTATUS(status);
 		if (WIFSIGNALED(status))
-			shell->last_return_code = return_if_sig(status,
-					shell->last_return_code);
+			shell->last_return_code = return_if_sig(status);
 		current_cmd = current_cmd->next;
 	}
 	if (shell->pipe_fds)
@@ -104,7 +102,6 @@ int	special_built(t_exec *cmd, t_data *shell)
 
 int	executor(t_data *shell)
 {
-	int	status;
 	int	ret;
 
 	shell->spec_built = 0;

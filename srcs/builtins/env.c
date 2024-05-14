@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   env.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vabertau <vabertau@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hzaz <hzaz@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/09 00:47:00 by hedi              #+#    #+#             */
-/*   Updated: 2024/05/14 11:37:08 by vabertau         ###   ########.fr       */
+/*   Updated: 2024/05/14 13:15:31 by hzaz             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,10 +88,9 @@ void	ft_update_env_inc2(t_env **tmp, char **s, int pos)
 void	ft_update_env(char *str, t_data *shell, int pos)
 {
 	char	**s;
-	int		index;
 	t_env	*tmp;
 
-	s = split_var(str, shell);
+	s = split_var(str);
 	tmp = shell->env;
 	if (!s)
 		return ;

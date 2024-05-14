@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   sig2.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vabertau <vabertau@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hzaz <hzaz@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/14 10:58:27 by vabertau          #+#    #+#             */
-/*   Updated: 2024/05/14 10:58:54 by vabertau         ###   ########.fr       */
+/*   Updated: 2024/05/14 13:14:17 by hzaz             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,5 +14,6 @@
 
 void	heredoc_sigint(int sig)
 {
+	(void)sig;
 	close(STDIN_FILENO);
 }

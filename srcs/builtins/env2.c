@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   env2.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vabertau <vabertau@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hzaz <hzaz@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/14 11:07:32 by vabertau          #+#    #+#             */
-/*   Updated: 2024/05/14 11:10:00 by vabertau         ###   ########.fr       */
+/*   Updated: 2024/05/14 13:14:57 by hzaz             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ char	**malloc_var(int i, char *s, int j, int n)
 	return (ret);
 }
 
-char	**split_var(char *s, t_data *shell)
+char	**split_var(char *s)
 {
 	int		i;
 	int		n;

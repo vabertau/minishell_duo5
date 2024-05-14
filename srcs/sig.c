@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   sig.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vabertau <vabertau@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hzaz <hzaz@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/07 15:23:58 by hzaz              #+#    #+#             */
-/*   Updated: 2024/05/14 10:58:42 by vabertau         ###   ########.fr       */
+/*   Updated: 2024/05/14 13:12:52 by hzaz             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-int	return_if_sig(int status, int l)
+int	return_if_sig(int status)
 {
 	if (WTERMSIG(status) == SIGINT)
 		ft_putstr_fd("\n", STDOUT_FILENO);
@@ -23,6 +23,7 @@ int	return_if_sig(int status, int l)
 
 static void	handle_sigint(int sig)
 {
+	(void)sig;
 	ft_putstr_fd("\n", STDOUT_FILENO);
 	rl_on_new_line();
 	rl_replace_line("", 0);
