@@ -6,7 +6,7 @@
 /*   By: hzaz <hzaz@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/10 16:54:44 by vabertau          #+#    #+#             */
-/*   Updated: 2024/05/14 11:41:39 by hzaz             ###   ########.fr       */
+/*   Updated: 2024/05/14 12:34:31 by hzaz             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ void	aff_val(t_data *data)
 int	len_env(t_env *env)
 {
 	t_env	*tmp;
-	int i;
+	int		i;
 
 	tmp = env;
 	i = 0;
@@ -88,7 +88,6 @@ void	trim_env(t_data *shell)
 		while (shell->env->var[i] && shell->env->var[i] != '=')
 			i++;
 		shell->env->var_name = ft_strndup(shell->env->var, i);
-
 		if (!shell->env->var_name)
 			perror("malloc");
 		if (!shell->env->var[i++])
@@ -101,6 +100,23 @@ void	trim_env(t_data *shell)
 	shell->env = tmp;
 }
 
+t_env	*create_new_env_node(char *env_var, int index)
+{
+	t_env	*new_node;
+
+	new_node = malloc(sizeof(t_env));
+	if (!new_node)
+		return (NULL);
+	new_node->var = ft_strdup(env_var);
+	new_node->index = index;
+	new_node->next = NULL;
+	if (!new_node->var)
+	{
+		free(new_node);
+		return (NULL);
+	}
+	return (new_node);
+}
 
 t_env	*copy_envp(char **envp, t_data *shell)
 {
@@ -108,37 +124,28 @@ t_env	*copy_envp(char **envp, t_data *shell)
 	t_env	*tmp;
 	int		i;
 
-	i = 0;
-	head = NULL;
+	i = -1;
 	tmp = NULL;
-	while (envp[i])
+	while (envp[++i])
 	{
 		if (tmp == NULL)
 		{
-			tmp = malloc(sizeof(t_env));
+			tmp = create_new_env_node(envp[i], i);
 			if (!tmp)
 				return (NULL);
-			if (head == NULL)
-				head = tmp;
+			head = tmp;
 		}
-		tmp->var = ft_strdup(envp[i]);
-		tmp->index = i;
-		tmp->next = NULL;
-		if (!tmp->var)
-			return (NULL);
-		if (envp[i + 1] != NULL)
+		else
 		{
-			tmp->next = malloc(sizeof(t_env));
+			tmp->next = create_new_env_node(envp[i], i);
 			if (!tmp->next)
-				return (NULL);
+				exit_free(shell, 1);
 			tmp = tmp->next;
 		}
-		i++;
 	}
 	shell->env = head;
 	return (head);
 }
-
 
 int	minishell_loop(t_data *data)
 {
@@ -152,7 +159,6 @@ int	minishell_loop(t_data *data)
 	parser(data);
 	if (data->sh_exit_loop)
 		return (-1);
-	// aff_val(data);
 	data->last_return_code = executor(data);
 	return (0);
 }
@@ -160,9 +166,8 @@ int	minishell_loop(t_data *data)
 int	main(int argc, char **argv, char **envp)
 {
 	t_data	data;
-	t_env *e;
-	// volatile sig_atomic_t signal_count = 0;
-	//setup_signal_handlers(handle_sigint_interactive, handle_sigquit);
+	t_env	*e;
+
 	(void)argc;
 	(void)argv;
 	data.char_env = NULL;
@@ -171,24 +176,16 @@ int	main(int argc, char **argv, char **envp)
 	data.envp = envp;
 	data.char_env = NULL;
 	trim_env(&data);
-
-
 	while (1)
 	{
-		
-		
 		set_char_env(&data);
 		main_signals();
 		init_data(&data);
 		minishell_loop(&data);
-		// if (!data.sh_exit_loop)
 		free_all(&data);
-		// printf("\n%d\n", data.last_return_code);
 	}
 	return (0);
-	// exit_free(&data, 0); //tmp
 }
-
 
 /*
 int	main(int argc, char **argv, char **envp)
