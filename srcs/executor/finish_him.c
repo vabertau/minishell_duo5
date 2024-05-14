@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   finish_him.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vabertau <vabertau@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hzaz <hzaz@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/08 21:08:17 by hedi              #+#    #+#             */
-/*   Updated: 2024/05/13 17:17:16 by vabertau         ###   ########.fr       */
+/*   Updated: 2024/05/14 11:45:37 by hzaz             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,8 +51,6 @@ void	exec_path(t_data *sh, t_exec *cmd, char **f, char *tmp)
 	e = sh->env;
 	while (e)
 	{
-
-
 		if (ft_same_str(e->var_name, "PATH", 4))
 		{
 
@@ -63,12 +61,9 @@ void	exec_path(t_data *sh, t_exec *cmd, char **f, char *tmp)
 				while (e->val[j] != ':' && e->val[j] && e->val)
 					j++;
 				ret = join_free1(ft_substr(e->val, k, ((j)-k)), tmp);
-				//printf("\ntest1: %s\n", ret);
 				if (e->val[j] == ':')
 					if (access(ret, F_OK) == 0)
-					{
 						execve(ret, f, sh->char_env);
-					}
 				free(ret);
 			}
 		}

@@ -6,7 +6,7 @@
 /*   By: hzaz <hzaz@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/10 16:54:44 by vabertau          #+#    #+#             */
-/*   Updated: 2024/05/13 17:57:01 by hzaz             ###   ########.fr       */
+/*   Updated: 2024/05/14 11:41:39 by hzaz             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -167,15 +167,16 @@ int	main(int argc, char **argv, char **envp)
 	(void)argv;
 	data.char_env = NULL;
 	data.last_return_code = 0;
-
+	data.env = copy_envp(envp, &data);
 	data.envp = envp;
 	data.char_env = NULL;
+	trim_env(&data);
 
 
 	while (1)
 	{
-		data.env = copy_envp(envp, &data);
-		trim_env(&data);
+		
+		
 		set_char_env(&data);
 		main_signals();
 		init_data(&data);
