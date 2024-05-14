@@ -6,7 +6,7 @@
 /*   By: hzaz <hzaz@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/11 15:02:38 by vabertau          #+#    #+#             */
-/*   Updated: 2024/05/13 17:53:41 by hzaz             ###   ########.fr       */
+/*   Updated: 2024/05/14 12:38:39 by hzaz             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,9 @@ void	free_exec(t_data *data)
 
 void	free_all(t_data *data)
 {
+	int	i;
+
+	i = -1;
 	if (data->cmdline != NULL)
 		free(data->cmdline);
 	if (data->token)
@@ -46,12 +49,19 @@ void	free_all(t_data *data)
 		free(data->is_bq);
 	if (data->pipe_fds)
 		free(data->pipe_fds);
-	free_env(data);
+	if (data->char_env)
+	{
+		while (data->char_env[++i])
+			if (data->char_env[i])
+				free(data->char_env[i]);
+		free(data->char_env);
+	}
 }
 
 void	exit_free(t_data *data, int exit_code)
 {
 	free_all(data);
+	free_env(data);
 	exit(exit_code);
 }
 

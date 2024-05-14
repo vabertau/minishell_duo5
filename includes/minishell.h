@@ -226,8 +226,8 @@ int					ft_putenv(char *s, t_data *shell);
 void				ft_printf_var_env(char *var);
 int					check_cmd(char *s);
 int					ft_export(char **split_cmd, t_data *shell);
-int					ft_unset(char **split_cmd);
-int					ft_env(char **envp);
+int	ft_unset(t_data *shell, char **split_cmd);
+int	ft_env(t_data *shell, char **f);
 int					have_equal(char *env);
 
 /* Function prototype for ft_exit */

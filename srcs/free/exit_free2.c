@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exit_free2.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vabertau <vabertau@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hzaz <hzaz@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/12 12:44:07 by vabertau          #+#    #+#             */
-/*   Updated: 2024/05/14 11:01:42 by vabertau         ###   ########.fr       */
+/*   Updated: 2024/05/14 12:38:02 by hzaz             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,16 +36,7 @@ void	free_bf_newprompt(t_data *data)
 void	free_env(t_data *shell)
 {
 	t_env	*tmp;
-	int		i;
 
-	i = -1;
-	if (shell->char_env)
-	{
-		while (shell->char_env[++i])
-			if (shell->char_env[i])
-				free(shell->char_env[i]);
-		free(shell->char_env);
-	}
 	while (shell->env)
 	{
 		tmp = shell->env->next;

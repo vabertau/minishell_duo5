@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   env4.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vabertau <vabertau@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hzaz <hzaz@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/14 11:34:46 by vabertau          #+#    #+#             */
-/*   Updated: 2024/05/14 11:37:13 by vabertau         ###   ########.fr       */
+/*   Updated: 2024/05/14 12:53:50 by hzaz             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,34 +41,41 @@ int	var_in_env(char *s, t_data *shell)
 	return (ret);
 }
 
-void	ft_add_env(char *s, t_data *shell)
+t_env	*initialize_new_node(char **str)
 {
-	char	**str;
 	t_env	*new_node;
-	t_env	*e;
 
-	str = split_var(s, shell);
-	if (!str)
-		return ;
 	new_node = malloc(sizeof(t_env));
 	if (!new_node)
 	{
 		perror("malloc");
-		return ;
+		return (NULL);
 	}
 	if (!str[1])
 	{
 		new_node->var = ft_strdup(str[0]);
-		new_node->var_name = new_node->val = NULL;
-		new_node->next = NULL;
+		new_node->val = NULL;
+		new_node->var_name = NULL;
 	}
 	else
 	{
 		new_node->var = join_free1(ft_strjoin(str[0], "="), str[1]);
 		new_node->var_name = ft_strdup(str[0]);
-		new_node->val = str[1] ? ft_strdup(str[1]) : NULL;
-		new_node->next = NULL;
+		if (str[1])
+		{
+			new_node->val = ft_strdup(str[1]);
+		}
+		else
+			new_node->val = NULL;
 	}
+	new_node->next = NULL;
+	return (new_node);
+}
+
+void	add_to_env(t_env *new_node, t_data *shell)
+{
+	t_env	*e;
+
 	if (shell->env == NULL)
 	{
 		shell->env = new_node;
@@ -82,6 +89,20 @@ void	ft_add_env(char *s, t_data *shell)
 		e->next = new_node;
 		new_node->index = e->index + 1;
 	}
+}
+
+void	ft_add_env(char *s, t_data *shell)
+{
+	char	**str;
+	t_env	*new_node;
+
+	str = split_var(s, shell);
+	if (!str)
+		return ;
+	new_node = initialize_new_node(str);
+	if (!new_node)
+		return ;
+	add_to_env(new_node, shell);
 }
 
 int	ft_putenv(char *s, t_data *shell)
