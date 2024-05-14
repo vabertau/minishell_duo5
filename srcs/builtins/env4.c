@@ -1,17 +1,17 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   env.c                                              :+:      :+:    :+:   */
+/*   env4.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vabertau <vabertau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/05/09 00:47:00 by hedi              #+#    #+#             */
-/*   Updated: 2024/05/14 11:37:08 by vabertau         ###   ########.fr       */
+/*   Created: 2024/05/14 11:34:46 by vabertau          #+#    #+#             */
+/*   Updated: 2024/05/14 11:37:13 by vabertau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
-/*
+
 int	var_in_env(char *s, t_data *shell)
 {
 	int		ret;
@@ -40,67 +40,7 @@ int	var_in_env(char *s, t_data *shell)
 	free(var);
 	return (ret);
 }
-*/
-int	check_plus(char *s)
-{
-	int	i;
 
-	i = 0;
-	while (s && s[i] && s[i] != '=' && s[i] != '+')
-		i++;
-	if (s[i] == '+')
-		return (1);
-	else
-		return (0);
-	return (-1);
-}
-
-void	ft_update_env_inc(t_env **tmp, char **s, int pos)
-{
-	while (*tmp && (*tmp)->index < pos)
-		*tmp = (*tmp)->next;
-	(*tmp)->val = join_free1((*tmp)->val, s[0]);
-	if (!(*tmp)->val)
-		perror("malloc");
-	free((*tmp)->var);
-	(*tmp)->var = join_free1(ft_strjoin((*tmp)->var_name, "="), (*tmp)->val);
-	if (!(*tmp)->var)
-		perror("malloc");
-}
-
-void	ft_update_env_inc2(t_env **tmp, char **s, int pos)
-{
-	while (*tmp && (*tmp)->index < pos)
-		*tmp = (*tmp)->next;
-	if (s[1] || have_equal((*tmp)->var))
-	{
-		free((*tmp)->val);
-		(*tmp)->val = ft_strdup(s[1]);
-		if (!(*tmp)->val)
-			perror("malloc");
-	}
-	free((*tmp)->var);
-	(*tmp)->var = join_free1(ft_strjoin((*tmp)->var_name, "="), (*tmp)->val);
-	if (!(*tmp)->var)
-		perror("malloc");
-}
-
-void	ft_update_env(char *str, t_data *shell, int pos)
-{
-	char	**s;
-	int		index;
-	t_env	*tmp;
-
-	s = split_var(str, shell);
-	tmp = shell->env;
-	if (!s)
-		return ;
-	if (check_plus(str))
-		ft_update_env_inc(&tmp, s, pos);
-	else
-		ft_update_env_inc2(&tmp, s, pos);
-}
-/*
 void	ft_add_env(char *s, t_data *shell)
 {
 	char	**str;
@@ -155,4 +95,3 @@ int	ft_putenv(char *s, t_data *shell)
 		ft_add_env(s, shell);
 	return (1);
 }
-*/
