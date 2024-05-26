@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   dir.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vabertau <vabertau@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hzaz <hzaz@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/09 00:46:16 by hedi              #+#    #+#             */
-/*   Updated: 2024/05/14 11:05:55 by vabertau         ###   ########.fr       */
+/*   Updated: 2024/05/26 22:50:10 by hzaz             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,18 +15,33 @@
 int	ft_cd(char **split_cmd, t_data *shell)
 {
 	int	ret;
+	char	*tmp;
+	char	*tmp2;
 
 	ret = 0;
 	if (split_cmd[2])
 	{
 		ft_putstr_fd("cd: too many arguments", 2);
-		ret = 1;
+		return (1);
 	}
-	if (split_cmd[1] == NULL || chdir(split_cmd[1]) != 0)
+	tmp = join_free2("OLDPWD=", getcwd(NULL, 0));
+	ret = chdir(split_cmd[1]);
+	if (split_cmd[1] == NULL || ret != 0)
 	{
 		perror("cd");
-		exit_free(shell, EXIT_FAILURE);
+		free_all(shell);
 	}
+	tmp2 = join_free2("PWD=", getcwd(NULL, 0));
+	if (var_in_env(tmp,shell) > -1)
+		ft_update_env(tmp, shell, var_in_env(tmp,shell));
+	else
+		ft_add_env(tmp, shell);
+	if (var_in_env(tmp2,shell) > -1)
+		ft_update_env(tmp2, shell, var_in_env(tmp2,shell));
+	else
+		ft_add_env(tmp2, shell);
+	free(tmp);
+	free(tmp2);
 	return (ret);
 }
 

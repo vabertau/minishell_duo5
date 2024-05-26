@@ -6,7 +6,7 @@
 /*   By: hzaz <hzaz@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/07 15:27:39 by vabertau          #+#    #+#             */
-/*   Updated: 2024/05/14 13:30:42 by hzaz             ###   ########.fr       */
+/*   Updated: 2024/05/26 22:51:26 by hzaz             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,8 @@ int	ft_exit(char **split_cmd, t_data *data)
 	int	exit_status;
 
 	exit_status = 0;
+	if (!split_cmd[1])
+		exit_free(data, exit_status);
 	if (split_cmd[2])
 	{
 		ft_putstr_fd("exit: too many arguments", 2);

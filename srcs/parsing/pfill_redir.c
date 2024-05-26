@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pfill_redir.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vabertau <vabertau@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hzaz <hzaz@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/23 14:47:39 by vabertau          #+#    #+#             */
-/*   Updated: 2024/05/12 14:03:05 by vabertau         ###   ########.fr       */
+/*   Updated: 2024/05/26 17:12:27 by hzaz             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,6 @@ word = infile and type = >
 void	malloc_redir(t_data *data)
 {
 	t_exec	*tmp_exec;
-	t_token	*tmp_token;
 	t_token	*tmp_redir;
 	int		i;
 	int		j;
@@ -46,7 +45,6 @@ void	malloc_redir(t_data *data)
 	i = 0;
 	j = 0;
 	tmp_exec = data->exec;
-	tmp_token = data->token;
 	while (i < data->nb_cmd)
 	{
 		j = 0;

@@ -6,7 +6,7 @@
 /*   By: hzaz <hzaz@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/14 11:34:46 by vabertau          #+#    #+#             */
-/*   Updated: 2024/05/14 13:44:51 by hzaz             ###   ########.fr       */
+/*   Updated: 2024/05/26 17:13:09 by hzaz             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,6 @@
 int	var_in_env(char *s, t_data *shell)
 {
 	int		ret;
-	int		j;
 	t_env	*tmp;
 	char	**var;
 
@@ -27,7 +26,6 @@ int	var_in_env(char *s, t_data *shell)
 		exit_free(shell, EXIT_FAILURE);
 	}
 	ret = -1;
-	j = -1;
 	while (tmp)
 	{
 		if (!ft_strcmp(tmp->var_name, var[0]))

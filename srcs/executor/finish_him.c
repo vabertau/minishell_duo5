@@ -6,7 +6,7 @@
 /*   By: hzaz <hzaz@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/08 21:08:17 by hedi              #+#    #+#             */
-/*   Updated: 2024/05/14 13:13:39 by hzaz             ###   ########.fr       */
+/*   Updated: 2024/05/26 19:05:00 by hzaz             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,6 +88,8 @@ void	exec_cmd(t_data *shell, t_exec *cmd)
 
 	handle_redirections(cmd, shell);
 	f = cmd->split_cmd;
+	if (f[0][0] == '.' && f[0][1]=='/')
+		execve(f[0], f, shell->char_env);
 	exec_build(shell, f);
 	tmp = ft_strjoin("/", f[0]);
 	if (access(tmp, F_OK) == 0)
