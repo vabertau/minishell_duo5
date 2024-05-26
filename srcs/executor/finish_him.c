@@ -80,6 +80,16 @@ void	exec_path(t_data *sh, char **f, char *tmp)
 	}
 }
 
+int is_directory(const char *path) {
+    struct stat fileStat;
+    if(stat(path, &fileStat) < 0) {
+        perror("stat");
+        return 0;
+    }
+
+    return S_ISDIR(fileStat.st_mode);
+}
+
 void	exec_cmd(t_data *shell, t_exec *cmd)
 {
 	char	*ret;
@@ -96,7 +106,10 @@ void	exec_cmd(t_data *shell, t_exec *cmd)
 		execve(tmp, f, shell->envp);
 	else
 		exec_path(shell, f, tmp);
-	ret = join_free1(ft_strjoin("command not found: ", f[0]), "\n");
+	if (is_directory(f[0])
+		ret = ft_strdup("is a directory.\n");
+	else
+		ret = join_free1(ft_strjoin("command not found: ", f[0]), "\n");
 	ft_putstr_fd_free(ret, 2);
 	free(tmp);
 	exit_free(shell, 127);
