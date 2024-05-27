@@ -6,7 +6,7 @@
 /*   By: hzaz <hzaz@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/08 21:08:17 by hedi              #+#    #+#             */
-/*   Updated: 2024/05/27 08:50:50 by hzaz             ###   ########.fr       */
+/*   Updated: 2024/05/27 09:40:16 by hzaz             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,6 +79,45 @@ void	exec_path(t_data *sh, char **f, char *tmp)
 		e = e->next;
 	}
 }
+
+int	check_shell_cmd(char *str)
+{
+	int		len;
+	int 	len2;
+	char	*tmp;
+
+	tmp = "/minishell";
+	len2 = ft_strlen(tmp);
+	len = ft_strlen(str);
+	while(str[--len] && tmp[--len2])
+	{
+		if(str[len] != tmp[len2])
+			return (0);
+	}
+	if (tmp[len2])
+		return (0);
+	return(1);
+}
+
+// void	exec_minishell(char **f, t_data *shell)
+// {
+
+// 	int tmp;
+
+// 	tmp = 0;
+// 	if (var_in_env(tmp,shell) > -1)
+// 		ft_update_env(tmp, shell, var_in_env(tmp,shell));
+// 	else
+// 		ft_add_env(tmp, shell);
+// 	if (var_in_env(tmp2,shell) > -1)
+// 		ft_update_env(tmp2, shell, var_in_env(tmp2,shell));
+// 	else
+// 		ft_add_env(tmp2, shell);
+// 	if (check_shell_cmd(f[0]))
+// 	{
+
+// 	}
+// }
 
 int is_directory(const char *path) 
 {
