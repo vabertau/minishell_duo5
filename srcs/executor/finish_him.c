@@ -6,7 +6,7 @@
 /*   By: hzaz <hzaz@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/08 21:08:17 by hedi              #+#    #+#             */
-/*   Updated: 2024/05/27 09:40:16 by hzaz             ###   ########.fr       */
+/*   Updated: 2024/05/27 19:57:06 by hzaz             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -122,7 +122,8 @@ int	check_shell_cmd(char *str)
 int is_directory(const char *path) 
 {
     struct stat fileStat;
-	
+	if (path && path[0] == ':' && !path[1])
+		return (-1);
     if(stat(path, &fileStat) < 0) {
         perror("stat");
         return 0;
@@ -137,8 +138,10 @@ void	exec_cmd(t_data *shell, t_exec *cmd)
 	char	*tmp;
 	char	**f;
 
-	handle_redirections(cmd, shell);
 	f = cmd->split_cmd;
+	if (f[0] && f[0][0] == ':' && !f[0][1])
+		exit_free(shell, 0);
+	handle_redirections(cmd, shell);
 	if (f[0][0] == '.' && f[0][1]=='/')
 		execve(f[0], f, shell->char_env);
 	exec_build(shell, f);
