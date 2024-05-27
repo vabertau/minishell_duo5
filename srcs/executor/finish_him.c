@@ -6,7 +6,7 @@
 /*   By: hzaz <hzaz@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/08 21:08:17 by hedi              #+#    #+#             */
-/*   Updated: 2024/05/26 19:05:00 by hzaz             ###   ########.fr       */
+/*   Updated: 2024/05/27 08:50:50 by hzaz             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,8 +80,10 @@ void	exec_path(t_data *sh, char **f, char *tmp)
 	}
 }
 
-int is_directory(const char *path) {
+int is_directory(const char *path) 
+{
     struct stat fileStat;
+	
     if(stat(path, &fileStat) < 0) {
         perror("stat");
         return 0;
@@ -106,7 +108,7 @@ void	exec_cmd(t_data *shell, t_exec *cmd)
 		execve(tmp, f, shell->envp);
 	else
 		exec_path(shell, f, tmp);
-	if (is_directory(f[0])
+	if (is_directory(f[0]))
 		ret = ft_strdup("is a directory.\n");
 	else
 		ret = join_free1(ft_strjoin("command not found: ", f[0]), "\n");

@@ -6,7 +6,7 @@
 /*   By: hzaz <hzaz@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/10 16:54:44 by vabertau          #+#    #+#             */
-/*   Updated: 2024/05/14 13:07:55 by hzaz             ###   ########.fr       */
+/*   Updated: 2024/05/27 09:14:48 by hzaz             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,7 @@ void	trim_env(t_data *shell)
 	int		i;
 
 	tmp = shell->env;
-	while (shell->env != NULL)
+	while (shell->env != NULL && shell->envp[0] )
 	{
 		i = 0;
 		while (shell->env->var[i] && shell->env->var[i] != '=')
@@ -124,6 +124,7 @@ t_env	*copy_envp(char **envp, t_data *shell)
 
 	i = -1;
 	tmp = NULL;
+	head = NULL;
 	while (envp[++i])
 	{
 		if (tmp == NULL)
