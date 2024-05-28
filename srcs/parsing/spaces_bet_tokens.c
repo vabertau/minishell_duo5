@@ -6,7 +6,7 @@
 /*   By: vabertau <vabertau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/11 09:48:08 by vabertau          #+#    #+#             */
-/*   Updated: 2024/05/12 12:53:49 by vabertau         ###   ########.fr       */
+/*   Updated: 2024/05/28 20:56:48 by vabertau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,11 @@ char	*add_space(char *cmdline, t_data *data)
 	while (ret[i])
 	{
 		i += skip_sq(&(ret[i]));
+		if (!ret[i])
+			break ; // ??
 		i += skip_dq(&(ret[i]));
+		if (!ret[i])
+			break ; // ??
 		if (ret[i] == '<' || ret[i] == '>' || ret[i] == '|')
 		{
 			tmp = ft_strdup(ret);
@@ -90,6 +94,8 @@ char	*add_space(char *cmdline, t_data *data)
 		}
 		i++;
 	}
+	ret[fixed_cmdline_len(cmdline)] = '\0';// to supp
+	data->cmdline_len = ft_strlen(ret);
 	return (free(cmdline), ret);
 }
 

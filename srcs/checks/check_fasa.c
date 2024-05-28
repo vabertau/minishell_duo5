@@ -6,7 +6,7 @@
 /*   By: vabertau <vabertau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/09 16:52:43 by vabertau          #+#    #+#             */
-/*   Updated: 2024/05/09 16:53:26 by vabertau         ###   ########.fr       */
+/*   Updated: 2024/05/28 20:48:06 by vabertau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,12 +70,16 @@ int	check_for_append_space_append(t_data *data)
 	i = 0;
 	space_found = 0;
 	cmdline = data->cmdline;
-	while (cmdline[i])
+	while ((i < data->cmdline_len) && cmdline[i])
 	{
 		if (cmdline[i] == '\'')
 			i += skip_sq(&(cmdline[i]));
+		if (!cmdline[i])
+			break ;
 		if (cmdline[i] == '\"')
 			i += skip_dq(&(cmdline[i]));
+		if (!cmdline[i])
+			break ;
 		if (check_left1(cmdline, &i, &space_found))
 			return (1);
 		if (check_right1(cmdline, &i, &space_found))

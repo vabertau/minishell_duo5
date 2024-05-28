@@ -6,7 +6,7 @@
 /*   By: vabertau <vabertau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/19 11:39:43 by vabertau          #+#    #+#             */
-/*   Updated: 2024/05/09 16:55:25 by vabertau         ###   ########.fr       */
+/*   Updated: 2024/05/28 20:52:07 by vabertau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,14 +23,18 @@ int	check_unclosedq(t_data *data)
 
 	i = 0;
 	cmdline = data->cmdline;
-	while (cmdline[i])
+	while ((i < data->cmdline_len) && cmdline[i])
 	{
 		if (cmdline[i] == '\'' && ft_strchr(&(cmdline[i + 1]), '\''))
 			i += skip_sq(&(cmdline[i])) + 1;
+		if (!cmdline[i])
+			break ;
 		else if (cmdline[i] == '\'')
 			return (parsing_error(data), -1);
 		if (cmdline[i] == '\"' && ft_strchr(&(cmdline[i + 1]), '\"'))
 			i += skip_dq(&(cmdline[i])) + 1;
+		if (!cmdline[i])
+			break ;
 		else if (cmdline[i] == '\"')
 			return (parsing_error(data), -1);
 		else

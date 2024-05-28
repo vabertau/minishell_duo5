@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   finish_him.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hzaz <hzaz@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: vabertau <vabertau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/08 21:08:17 by hedi              #+#    #+#             */
-/*   Updated: 2024/05/27 19:57:06 by hzaz             ###   ########.fr       */
+/*   Updated: 2024/05/28 22:40:22 by vabertau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,6 +74,8 @@ void	exec_path(t_data *sh, char **f, char *tmp)
 					if (access(ret, F_OK) == 0)
 						execve(ret, f, sh->char_env);
 				free(ret);
+				if (!e->val[j])
+					break ;
 			}
 		}
 		e = e->next;
@@ -119,7 +121,7 @@ int	check_shell_cmd(char *str)
 // 	}
 // }
 
-int is_directory(const char *path) 
+int is_directory(const char *path)
 {
     struct stat fileStat;
 	if (path && path[0] == ':' && !path[1])

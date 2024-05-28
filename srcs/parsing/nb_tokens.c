@@ -6,7 +6,7 @@
 /*   By: vabertau <vabertau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/10 17:42:01 by vabertau          #+#    #+#             */
-/*   Updated: 2024/05/12 17:02:35 by vabertau         ###   ########.fr       */
+/*   Updated: 2024/05/28 20:52:42 by vabertau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,9 +55,13 @@ void	nb_tokens(t_data *data)
 			if ((data->cmdline[i] == '\'') && ft_strchr(&(data->cmdline[i + 1]),
 					'\''))
 				i += skip_sq(&(data->cmdline[i]));
+			if (!data->cmdline[i])
+			break ;
 			if ((data->cmdline[i] == '\"') && ft_strchr(&(data->cmdline[i + 1]),
 					'\"'))
 				i += skip_dq(&(data->cmdline[i]));
+			if (!data->cmdline[i])
+			break ;
 			i += skip_ns(&(data->cmdline[i]));
 		}
 	}

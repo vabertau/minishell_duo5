@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hzaz <hzaz@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: vabertau <vabertau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/14 13:05:07 by hzaz              #+#    #+#             */
-/*   Updated: 2024/05/14 13:33:02 by hzaz             ###   ########.fr       */
+/*   Updated: 2024/05/28 20:45:32 by vabertau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,6 +73,7 @@ typedef struct s_exec
 typedef struct s_data
 {
 	char			*cmdline;
+	int				cmdline_len;
 	int				nb_tokens;
 	int				nb_sq;
 	int				nb_dq;
