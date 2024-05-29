@@ -6,7 +6,7 @@
 /*   By: vabertau <vabertau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/11 09:48:08 by vabertau          #+#    #+#             */
-/*   Updated: 2024/05/28 20:56:48 by vabertau         ###   ########.fr       */
+/*   Updated: 2024/05/29 13:08:31 by vabertau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,7 +84,7 @@ char	*add_space(char *cmdline, t_data *data)
 		i += skip_dq(&(ret[i]));
 		if (!ret[i])
 			break ; // ??
-		if (ret[i] == '<' || ret[i] == '>' || ret[i] == '|')
+		if (ret[i] == '<' || ret[i] == '>' || ret[i] == '|') // added = to fix segfault on export=\"hey y\" counting token after hey when founding space
 		{
 			tmp = ft_strdup(ret);
 			if (!tmp)

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hzaz <hzaz@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: vabertau <vabertau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/10 16:54:44 by vabertau          #+#    #+#             */
-/*   Updated: 2024/05/27 09:14:48 by hzaz             ###   ########.fr       */
+/*   Updated: 2024/05/29 15:11:27 by vabertau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -185,6 +185,32 @@ int	main(int argc, char **argv, char **envp)
 	return (0);
 }
 
+// ==== MAIN FIX LEAKS LLDB ====
+
+/*
+int	main(int argc, char **argv, char **envp)
+{
+	t_data	data;
+
+	(void)argc;
+	(void)argv;
+	data.char_env = NULL;
+	data.last_return_code = 0;
+	data.env = copy_envp(envp, &data);
+	data.envp = envp;
+	data.char_env = NULL;
+	trim_env(&data);
+	//while (1)
+	//{
+		set_char_env(&data);
+		main_signals();
+		init_data(&data);
+		minishell_loop(&data);
+		free_all(&data);
+	//}
+	return (0);
+}
+*/
 /*
 int	main(int argc, char **argv, char **envp)
 {

@@ -6,7 +6,7 @@
 /*   By: vabertau <vabertau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/10 17:42:01 by vabertau          #+#    #+#             */
-/*   Updated: 2024/05/28 20:52:42 by vabertau         ###   ########.fr       */
+/*   Updated: 2024/05/29 13:40:00 by vabertau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,18 @@ static int	skip_ns(char *cmdline)
 
 	i = 0;
 	while (cmdline[i] && (cmdline[i] != ' '))
+	{
+		if (i != 0)
+		{
+			if ((cmdline[i] == '\'') && ft_strchr(&(cmdline[i + 1]),
+					'\''))
+					i += skip_sq(&(cmdline[i]));
+			if ((cmdline[i] == '\"') && ft_strchr(&(cmdline[i + 1]),
+					'\"'))
+					i += skip_dq(&(cmdline[i]));
+		}
 		i++;
+	}
 	return (i);
 }
 

@@ -6,7 +6,7 @@
 /*   By: vabertau <vabertau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/10 16:55:39 by vabertau          #+#    #+#             */
-/*   Updated: 2024/05/28 20:57:25 by vabertau         ###   ########.fr       */
+/*   Updated: 2024/05/29 15:11:38 by vabertau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@ void	get_input(t_data *data)
 	char	*line;
 
 	line = readline("minishell\% ");
+	//line = ft_strdup("export hello world");
 	if (line == NULL)
 	{
 		ft_printf("\n");
