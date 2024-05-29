@@ -6,7 +6,7 @@
 /*   By: vabertau <vabertau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/30 18:46:03 by vabertau          #+#    #+#             */
-/*   Updated: 2024/05/29 16:00:06 by vabertau         ###   ########.fr       */
+/*   Updated: 2024/05/29 16:05:33 by vabertau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -152,7 +152,7 @@ void	launch_expand(t_data *data, t_token *token)
 			i += len_var;
 		}
 		if (!word[i])
-			break ;
+			break ; // fixes invalid read on echo $?
 		i++;
 	}
 	token->word = word;
