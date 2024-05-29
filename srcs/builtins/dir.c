@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   dir.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hzaz <hzaz@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: vabertau <vabertau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/09 00:46:16 by hedi              #+#    #+#             */
-/*   Updated: 2024/05/26 22:50:10 by hzaz             ###   ########.fr       */
+/*   Updated: 2024/05/29 15:27:07 by vabertau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ int	ft_cd(char **split_cmd, t_data *shell)
 	if (split_cmd[1] == NULL || ret != 0)
 	{
 		perror("cd");
-		free_all(shell);
+		//free_all(shell); //enleve car genere un double free et inutile car est free ensuite
 	}
 	tmp2 = join_free2("PWD=", getcwd(NULL, 0));
 	if (var_in_env(tmp,shell) > -1)
