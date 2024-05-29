@@ -6,7 +6,7 @@
 /*   By: vabertau <vabertau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/12 11:42:54 by vabertau          #+#    #+#             */
-/*   Updated: 2024/05/12 18:13:25 by vabertau         ###   ########.fr       */
+/*   Updated: 2024/05/29 16:09:09 by vabertau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ void	replace_var(t_data *data, char **word, int i, int len_var)
 	if ((len_var == 1) && (*word)[i + 1] == '?')
 		var_c = ft_itoa_protect(data, var_name);
 	else
-		var_c = fetch_var_content(data, var_name, data->envp);
+		var_c = fetch_var_content(data, var_name, data->char_env);
 	ret = malloc(sizeof(char) * (ft_strlen(*word) + ft_strlen(var_c) + 1));
 	if (ret == NULL)
 		return ((void)free(var_name), (void)free(var_c), exit_free(data, -1));
