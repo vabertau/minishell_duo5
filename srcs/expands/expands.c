@@ -6,7 +6,7 @@
 /*   By: vabertau <vabertau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/30 18:46:03 by vabertau          #+#    #+#             */
-/*   Updated: 2024/05/30 11:37:13 by vabertau         ###   ########.fr       */
+/*   Updated: 2024/05/30 12:17:26 by vabertau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -151,8 +151,9 @@ void	launch_expand(t_data *data, t_token *token)
 			replace_var(data, &word, i, len_var);
 			i += len_var;
 		}
-		if (!word[0] || !word[i])
-			break ; // fixes invalid read on echo $?. !word[0] is necessary for echo $hola, unexisting variable, word is empty
+		if (!word || ft_strlen(word) < i + 1 || !word[i])
+			break ; // fixes invalid read on echo $?. !word[0] is necessary for echo $hola, unexisting variable, word is empty,
+			//replace by ft_strlen(word) < i+1 fixes uninitialized value for echo [$unexisting, word and word[0] exists but word[i] is uninitialized
 		i++;
 	}
 	token->word = word;
