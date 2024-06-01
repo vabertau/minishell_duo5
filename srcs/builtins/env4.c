@@ -6,7 +6,7 @@
 /*   By: hzaz <hzaz@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/14 11:34:46 by vabertau          #+#    #+#             */
-/*   Updated: 2024/05/26 17:13:09 by hzaz             ###   ########.fr       */
+/*   Updated: 2024/06/01 15:37:21 by hzaz             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,24 +18,37 @@ int	var_in_env(char *s, t_data *shell)
 	t_env	*tmp;
 	char	**var;
 
+	// Split the variable name and value
 	var = split_var(s);
-	tmp = shell->env;
 	if (!var)
 	{
 		perror("malloc");
 		exit_free(shell, EXIT_FAILURE);
 	}
+
+	// Initialize variables
 	ret = -1;
+	tmp = shell->env;
+
+	// Traverse the environment linked list
 	while (tmp)
 	{
-		if (!ft_strcmp(tmp->var_name, var[0]))
+		// Compare variable names
+		if (tmp->var_name && !ft_strcmp(tmp->var_name, var[0]))
+		{
 			ret = tmp->index;
+			break;
+		}
 		tmp = tmp->next;
 	}
+
+	// Free allocated memory
+	free(var[0]);
 	if (var[1])
 		free(var[1]);
-	free(var[0]);
 	free(var);
+
+	// Return the position or -1 if not found
 	return (ret);
 }
 

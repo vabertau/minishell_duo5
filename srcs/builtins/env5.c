@@ -6,7 +6,7 @@
 /*   By: hzaz <hzaz@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/14 13:18:55 by hzaz              #+#    #+#             */
-/*   Updated: 2024/05/14 13:19:27 by hzaz             ###   ########.fr       */
+/*   Updated: 2024/06/01 14:49:27 by hzaz             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,10 +55,13 @@ int	validate_and_add_var(char *var, t_data *shell)
 		ft_putstr_fd_free(join_free1(tmp, "': not a valid identifier\n"), 2);
 		result = 1;
 	}
-	else if (ft_putenv(var, shell) != 1)
+	else 
 	{
-		perror("export");
-		exit_free(shell, EXIT_FAILURE);
+		if (ft_putenv(var, shell) != 1)
+		{
+			perror("export");
+			exit_free(shell, EXIT_FAILURE);
+		}
 	}
 	return (result);
 }
