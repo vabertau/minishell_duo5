@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   finish_him.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vabertau <vabertau@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hzaz <hzaz@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/08 21:08:17 by hedi              #+#    #+#             */
-/*   Updated: 2024/05/28 22:40:22 by vabertau         ###   ########.fr       */
+/*   Updated: 2024/06/01 17:35:00 by hzaz             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,10 @@ void	exec_path(t_data *sh, char **f, char *tmp)
 				ret = join_free1(ft_substr(e->val, k, ((j) - k)), tmp);
 				if (e->val[j] == ':')
 					if (access(ret, F_OK) == 0)
+					{
 						execve(ret, f, sh->char_env);
+						perror("minishell :");
+					}
 				free(ret);
 				if (!e->val[j])
 					break ;
@@ -139,24 +142,56 @@ void	exec_cmd(t_data *shell, t_exec *cmd)
 	char	*ret;
 	char	*tmp;
 	char	**f;
+	int		code;
 
+	code = 0;
 	f = cmd->split_cmd;
 	if (f[0] && f[0][0] == ':' && !f[0][1])
 		exit_free(shell, 0);
 	handle_redirections(cmd, shell);
 	if (f[0][0] == '.' && f[0][1]=='/')
-		execve(f[0], f, shell->char_env);
+	{
+        if (access(f[0], F_OK) != 0)
+        {
+            perror("minishell :");
+            code = 127;
+        }
+        else if (is_directory(f[0]))
+        {
+            ft_putstr_fd("minishell: is a directory.\n", 2);
+            code = 126;
+        }
+        else if (access(f[0], X_OK) != 0)
+        {
+            perror("minishell :");
+            code = 126;
+        }
+        else
+        {
+            execve(f[0], f, shell->char_env);
+            perror("minishell :");
+            code = 126;
+        }
+        exit_free(shell, code);
+	}
 	exec_build(shell, f);
 	tmp = ft_strjoin("/", f[0]);
 	if (access(tmp, F_OK) == 0)
+	{
 		execve(tmp, f, shell->envp);
+		perror("minishell :");
+	}
 	else
 		exec_path(shell, f, tmp);
-	if (is_directory(f[0]))
+	code = 127;
+	if (f[0][0] == '/' && is_directory(f[0]))
+	{
 		ret = ft_strdup("is a directory.\n");
+		code = 126;
+	}
 	else
 		ret = join_free1(ft_strjoin("command not found: ", f[0]), "\n");
 	ft_putstr_fd_free(ret, 2);
 	free(tmp);
-	exit_free(shell, 127);
+	exit_free(shell, code);
 }

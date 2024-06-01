@@ -6,7 +6,7 @@
 /*   By: hzaz <hzaz@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/09 00:46:16 by hedi              #+#    #+#             */
-/*   Updated: 2024/05/31 23:25:17 by hzaz             ###   ########.fr       */
+/*   Updated: 2024/06/01 16:19:49 by hzaz             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,6 @@ int	ft_cd(char **split_cmd, t_data *shell)
 	ret = 0;
 	if (split_cmd[2] && split_cmd[1])
 	{
-		printf("\n%p\n", split_cmd[2]);
 		ft_putstr_fd("cd: too many arguments\n", 2);
 		return (1);
 	}
@@ -59,7 +58,7 @@ int	ft_cd(char **split_cmd, t_data *shell)
 	{
 		perror("cd");
 		free(tmp);
-		free_all(shell);
+		return (1);
 	}
 	tmp2 = join_free2("PWD=", getcwd(NULL, 0));
 	if (var_in_env(tmp,shell) > -1)
