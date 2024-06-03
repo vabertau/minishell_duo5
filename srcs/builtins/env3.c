@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   env3.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vabertau <vabertau@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hzaz <hzaz@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/14 11:32:12 by vabertau          #+#    #+#             */
-/*   Updated: 2024/05/29 15:30:18 by vabertau         ###   ########.fr       */
+/*   Updated: 2024/06/04 00:08:37 by hzaz             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,7 @@ int	ft_unset(t_data *shell, char **split_cmd)
 	ret = 0;
 	while (split_cmd[i])
 	{
-		if (validate_identifier(split_cmd[i]))
+		if (validate_identifier(split_cmd[i]) && ft_strcmp(split_cmd[i], "_"))
 		{
 			remove_env_var(shell, split_cmd[i]);
 		}

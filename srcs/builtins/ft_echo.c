@@ -6,7 +6,7 @@
 /*   By: hzaz <hzaz@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/07 15:27:39 by vabertau          #+#    #+#             */
-/*   Updated: 2024/05/26 22:51:26 by hzaz             ###   ########.fr       */
+/*   Updated: 2024/06/04 00:15:05 by hzaz             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,6 +74,10 @@ int	ft_exit(char **split_cmd, t_data *data)
 			exit_status = 2;
 		}
 	}
+	if (exit_status < 0)
+        exit_status = 256 + (exit_status % 256);
+    else
+		exit_status = exit_status % 256;
 	exit_free(data, exit_status);
 	return (exit_status);
 }

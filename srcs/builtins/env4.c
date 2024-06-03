@@ -6,7 +6,7 @@
 /*   By: hzaz <hzaz@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/14 11:34:46 by vabertau          #+#    #+#             */
-/*   Updated: 2024/06/01 16:16:37 by hzaz             ###   ########.fr       */
+/*   Updated: 2024/06/01 19:45:42 by hzaz             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@ int	var_in_env(char *s, t_data *shell)
 		perror("malloc");
 		exit_free(shell, EXIT_FAILURE);
 	}
+
 	ret = -1;
 	tmp = shell->env;
 	while (tmp)
@@ -35,6 +36,7 @@ int	var_in_env(char *s, t_data *shell)
 		}
 		tmp = tmp->next;
 	}
+
 	free(var[0]);
 	if (var[1])
 		free(var[1]);
@@ -48,27 +50,27 @@ t_env	*initialize_new_node(char **str)
 
 	new_node = malloc(sizeof(t_env));
 	if (!new_node)
+	{
 		perror("malloc");
+		return (NULL);
+	}
 	if (!str[1])
 	{
 		new_node->var = ft_strdup(str[0]);
+		new_node->var_name = ft_strdup(str[0]);
 		new_node->val = NULL;
-		new_node->var_name = NULL;
 	}
 	else
 	{
 		new_node->var = join_free1(ft_strjoin(str[0], "="), str[1]);
 		new_node->var_name = ft_strdup(str[0]);
-		if (str[1])
-		{
-			new_node->val = ft_strdup(str[1]);
-		}
-		else
-			new_node->val = NULL;
+		new_node->val = ft_strdup(str[1]);
 	}
 	new_node->next = NULL;
 	return (new_node);
 }
+
+
 
 void	add_to_env(t_env *new_node, t_data *shell)
 {
@@ -88,7 +90,6 @@ void	add_to_env(t_env *new_node, t_data *shell)
 		new_node->index = e->index + 1;
 	}
 }
-
 void	ft_add_env(char *s, t_data *shell)
 {
 	char	**str;
@@ -107,14 +108,22 @@ void	ft_add_env(char *s, t_data *shell)
 	free(str);
 }
 
+
+
 int	ft_putenv(char *s, t_data *shell)
 {
 	int	pos;
 
 	pos = var_in_env(s, shell);
 	if (pos > -1)
+	{
 		ft_update_env(s, shell, pos);
+	}
 	else
+	{
 		ft_add_env(s, shell);
+	}
 	return (1);
 }
+
+
