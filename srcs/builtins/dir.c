@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   dir.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hzaz <hzaz@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: vabertau <vabertau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/09 00:46:16 by hedi              #+#    #+#             */
-/*   Updated: 2024/06/01 16:19:49 by hzaz             ###   ########.fr       */
+/*   Updated: 2024/06/03 15:40:43 by vabertau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ int	ft_cd(char **split_cmd, t_data *shell)
 	char	*tmp2;
 
 	ret = 0;
-	if (split_cmd[2] && split_cmd[1])
+	if (split_cmd[1] && split_cmd[2])
 	{
 		ft_putstr_fd("cd: too many arguments\n", 2);
 		return (1);

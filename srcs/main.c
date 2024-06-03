@@ -6,7 +6,7 @@
 /*   By: vabertau <vabertau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/10 16:54:44 by vabertau          #+#    #+#             */
-/*   Updated: 2024/05/30 12:17:46 by vabertau         ###   ########.fr       */
+/*   Updated: 2024/06/03 15:39:26 by vabertau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -969,9 +969,9 @@ int	main(int argc, char **argv, char **envp)
 	i = 0;
 	//while (1)
 	//{
-		init_data(&data, envp);
+		init_data(&data);
 		//get_input(&data);
-		data.cmdline = ft_strdup("echo \"$SHELL et autre chose\"");
+		data.cmdline = ft_strdup("cd");
 		lexer(&data);
 		expands(&data);
 		parser(&data);
@@ -1008,8 +1008,8 @@ int	main(int argc, char **argv, char **envp)
 //	}
 	exit_free(&data, 0); //tmp
 }
-
 */
+
 
 /*
 int	main(int argc, char **argv, char **envp)
