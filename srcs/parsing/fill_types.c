@@ -6,7 +6,7 @@
 /*   By: vabertau <vabertau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/16 12:07:22 by vabertau          #+#    #+#             */
-/*   Updated: 2024/05/12 17:03:37 by vabertau         ###   ########.fr       */
+/*   Updated: 2024/06/10 17:29:50 by vabertau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ void	fill_types(t_data *data)
 	tmp = data->token;
 	while (i < data->nb_tokens)
 	{
-		if (!ft_strcmp(tmp->word, "|"))
+		if (!ft_strcmp(tmp->word, "|") && !data->is_bq[i])
 			tmp->type = PIPE;
 		else if (!ft_strcmp(tmp->word, "<"))
 			tmp->type = LEFT1;
