@@ -6,7 +6,7 @@
 /*   By: vabertau <vabertau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/10 16:55:39 by vabertau          #+#    #+#             */
-/*   Updated: 2024/05/30 12:18:54 by vabertau         ###   ########.fr       */
+/*   Updated: 2024/06/10 12:57:57 by vabertau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,7 @@ void	get_input(t_data *data)
 	char	*line;
 
 	line = readline("minishell\% ");
-	//line = ft_strdup("echo my shit terminal is [$TERM4");
-	//line = ft_strdup("ls");
+	//line = ft_strdup("cat <\"1\"\"2\"\"3\"\"4\"\"5\"");
 	if (line == NULL)
 	{
 		ft_printf("\n");
