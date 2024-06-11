@@ -6,7 +6,7 @@
 /*   By: vabertau <vabertau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/10 16:54:44 by vabertau          #+#    #+#             */
-/*   Updated: 2024/06/10 12:58:17 by vabertau         ###   ########.fr       */
+/*   Updated: 2024/06/11 16:03:00 by vabertau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -180,6 +180,7 @@ int	main(int argc, char **argv, char **envp)
 		main_signals();
 		init_data(&data);
 		minishell_loop(&data);
+		//aff_val(&data);
 		free_all(&data);
 	}
 	return (0);
@@ -971,7 +972,7 @@ int	main(int argc, char **argv, char **envp)
 	//{
 		init_data(&data);
 		//get_input(&data);
-		data.cmdline = ft_strdup("cd");
+		data.cmdline = ft_strdup("hey $unexisting hello");
 		lexer(&data);
 		expands(&data);
 		parser(&data);
