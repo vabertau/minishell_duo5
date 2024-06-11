@@ -6,7 +6,7 @@
 /*   By: vabertau <vabertau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/07 15:27:39 by vabertau          #+#    #+#             */
-/*   Updated: 2024/06/11 12:51:10 by vabertau         ###   ########.fr       */
+/*   Updated: 2024/06/11 14:29:23 by vabertau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ int	ft_echo(char **split_cmd)
 
 	i = 1;
 	nl_to_put = 1;
-	if (split_cmd[1] && !ft_strncmp(split_cmd[1], "-n", 2))
+	if (split_cmd[1] && !ft_strncmp(split_cmd[1], "-n", 3))
 	{
 		nl_to_put = 0;
 		i++;
