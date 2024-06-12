@@ -6,7 +6,7 @@
 /*   By: hzaz <hzaz@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/08 21:06:09 by hedi              #+#    #+#             */
-/*   Updated: 2024/06/01 19:39:46 by hzaz             ###   ########.fr       */
+/*   Updated: 2024/06/12 13:39:04 by hzaz             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,14 @@ char	*join_free2(char const *s1, char const *s2)
 	i = 0;
 	j = 0;
 	k = 0;
+	if (!s2 && !s1)
+		return NULL;
+	if (!s1)
+		return ft_strdup(s2);
+	if (!s2)
+		return ft_strdup(s1);
+	if (!s1)
+		return ft_strdup(s2);
 	len = (ft_strlen(s1) + ft_strlen(s2));
 	dest = malloc(len + 1 * sizeof(char));
 	if (!dest)

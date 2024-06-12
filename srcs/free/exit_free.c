@@ -6,7 +6,7 @@
 /*   By: hzaz <hzaz@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/11 15:02:38 by vabertau          #+#    #+#             */
-/*   Updated: 2024/06/12 10:58:59 by hzaz             ###   ########.fr       */
+/*   Updated: 2024/06/12 12:02:51 by hzaz             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,10 +21,9 @@ void	free_redir(t_exec *tmp_exec)
 	to_free = tmp_exec->redir;
 	while (tmp_redir)
 	{
-		if (tmp_redir->word)
-			free(tmp_redir->word);
-		tmp_redir->word = NULL;
 		tmp_redir = tmp_redir->next;
+		if (to_free->word && to_free->type == LEFT2)
+			free(to_free->word);
 		free(to_free);
 		to_free = NULL;
 		to_free = tmp_redir;
