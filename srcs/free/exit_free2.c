@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: hzaz <hzaz@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/05/12 12:44:07 by vabertau          #+#    #+#             */
-/*   Updated: 2024/05/14 12:38:02 by hzaz             ###   ########.fr       */
+/*   Created: 2024/05/12 12:44:07 by hzaz               #+#    #+#             */
+/*   Updated: 2024/06/12 08:50:32 by hzaz             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,9 +20,11 @@ void	free_token(t_token *token)
 	{
 		tmp = token;
 		token = token->next;
-		if (tmp->word != NULL)
+		if (tmp->word)
 			free(tmp->word);
+		tmp->word = NULL;
 		free(tmp);
+		tmp = NULL;
 	}
 }
 

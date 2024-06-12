@@ -1,0 +1,10 @@
+42_minishell_tester
+file
+includes
+libftprintf
+Makefile
+minishell
+out
+readline.supp
+srcs
+structure.txt
